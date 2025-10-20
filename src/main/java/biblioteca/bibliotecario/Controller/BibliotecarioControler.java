@@ -10,18 +10,30 @@ import java.util.List;
 @RequestMapping("/Bibliotecario")
 public class BibliotecarioControler {
 
-private final BibliotecarioService service;
+    private final BibliotecarioService service;
 
-    public BibliotecarioControler (BibliotecarioService service){
-    this.service = service;
+    public BibliotecarioControler(BibliotecarioService service) {
+        this.service = service;
     }
 
     @GetMapping
-    public List<Bibliotecario>getALL(){return service.getALL();
+    public List<Bibliotecario> getALL() {
+        return service.getALL();
     }
 
     @PostMapping
-    public Bibliotecario create(@RequestBody Bibliotecario bibliotecario) {return service.save(bibliotecario);
+    public Bibliotecario create(@RequestBody Bibliotecario bibliotecario) {
+        return service.save(bibliotecario);
+    }
+
+    @DeleteMapping("/Bibliotecario")
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
+    }
+
+    @PutMapping("/{id}")
+    public Bibliotecario update(@PathVariable Long id, @RequestBody Bibliotecario bibliotecario) {
+        return service.update(id, bibliotecario);
     }
 
 }

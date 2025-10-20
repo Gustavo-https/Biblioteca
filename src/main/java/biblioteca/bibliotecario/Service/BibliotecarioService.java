@@ -17,4 +17,15 @@ public BibliotecarioService (BibliotecarioRepository repository){this.repository
     public Bibliotecario save(Bibliotecario bibliotecario) {return repository.save(bibliotecario);}
 
 public void delete(Long id){repository.deleteById(id);}
+
+    public Bibliotecario update(Long id, Bibliotecario bibliotecarioAtualizado) {
+        return repository.findById(id)
+                .map(bibliotecario -> {
+                    bibliotecario.setNome(bibliotecarioAtualizado.getNome());
+                    bibliotecario.setQuantidade(bibliotecarioAtualizado.getQuantidade());
+                    return repository.save(bibliotecario);
+                })
+                .orElseThrow(() -> new RuntimeException("Bibliotecário não encontrado com o ID: " + id));
+    }
+
 }
