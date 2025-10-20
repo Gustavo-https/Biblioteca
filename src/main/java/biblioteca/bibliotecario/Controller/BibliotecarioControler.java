@@ -1,7 +1,27 @@
 package biblioteca.bibliotecario.Controller;
 
-import org.springframework.stereotype.Controller;
+import biblioteca.bibliotecario.Model.Bibliotecario;
+import biblioteca.bibliotecario.Service.BibliotecarioService;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
+@RequestMapping("/Bibliotecario")
 public class BibliotecarioControler {
+
+private final BibliotecarioService service;
+
+    public BibliotecarioControler (BibliotecarioService service){
+    this.service = service;
+    }
+
+    @GetMapping
+    public List<Bibliotecario>getALL(){return service.getALL();
+    }
+
+    @PostMapping
+    public Bibliotecario create(@RequestBody Bibliotecario bibliotecario) {return service.save(bibliotecario);
+    }
+
 }
